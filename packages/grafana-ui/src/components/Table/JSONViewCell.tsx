@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import { TableCellProps } from './types';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { JSONFormatter } from '../JSONFormatter/JSONFormatter';
+import { useTheme } from '../../themes';
 
 export const JSONViewCell: FC<TableCellProps> = props => {
   const { field, cell, tableStyles } = props;
@@ -32,12 +33,16 @@ interface PopupProps {
 }
 
 const JSONTooltip: FC<PopupProps> = props => {
-  const clazz = css`
-    padding: 10px;
+  const theme = useTheme();
+  const className = css`
+    padding: ${theme.spacing.xs};
+    background-color: ${theme.colors.bg1};
   `;
   return (
-    <div className={clazz}>
-      <JSONFormatter json={props.value} open={4} />
+    <div className={className}>
+      <div style={{ backgroundColor: '#fff' }}>
+        <JSONFormatter json={props.value} open={4} />
+      </div>
     </div>
   );
 };
